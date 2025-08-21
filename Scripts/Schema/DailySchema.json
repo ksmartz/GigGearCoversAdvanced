@@ -1,0 +1,438 @@
+﻿{
+    "database":  "GigGearCoversDb",
+    "generatedOn":  "2025-08-21T00:06:17",
+    "tables":  [
+                   {
+                       "name":  "FabricBrandName",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_FabricBrandNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "BrandName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_FabricBrandNameId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "BrandName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "FabricBrandProductName",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_FabricBrandProductNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "BrandProductName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_FabricBrandNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_FabricBrandProductNameId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "BrandProductName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_FabricBrandNameId",
+                                               "ReferencedTable":  "FabricBrandName",
+                                               "ReferencedColumn":  "PK_FabricBrandNameId"
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "FabricPricingHistory",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_PricingHistoryId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_SupplierProductNameDataId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "DateFrom",
+                                           "DataType":  "date",
+                                           "MaxLength":  3,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "DateTo",
+                                           "DataType":  "date",
+                                           "MaxLength":  3,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "ShippingCost",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "CostPerLinearYard",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "CostPerSquareInch",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "WeightPerSquareInch",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_PricingHistoryId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_SupplierProductNameDataId",
+                                               "ReferencedTable":  "SupplierProductNameData",
+                                               "ReferencedColumn":  "PK_SupplierProductNameDataId"
+                                           },
+                                           {
+                                               "ColumnName":  "DateFrom",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "DateTo",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "ShippingCost",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "CostPerLinearYard",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "CostPerSquareInch",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "WeightPerSquareInch",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "FabricTypeName",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_FabricTypeNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FabricTypeName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_FabricTypeNameId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FabricTypeName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "SupplierInformation",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_SupplierNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "CompanyName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Name",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Phone",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Email",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Website",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Address",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  600,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_SupplierNameId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "CompanyName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Name",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Phone",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Email",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Website",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Address",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "SupplierProductNameData",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_SupplierProductNameDataId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_SupplierNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_FabricBrandProductNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_FabricTypeNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "WeightPerLinearYard",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SquareInchesPerLinearYard",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FabricRollWidth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "TotalYards",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_SupplierProductNameDataId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_SupplierNameId",
+                                               "ReferencedTable":  "SupplierInformation",
+                                               "ReferencedColumn":  "PK_SupplierNameId"
+                                           },
+                                           {
+                                               "ColumnName":  "FK_FabricBrandProductNameId",
+                                               "ReferencedTable":  "FabricBrandProductName",
+                                               "ReferencedColumn":  "PK_FabricBrandProductNameId"
+                                           },
+                                           {
+                                               "ColumnName":  "FK_FabricTypeNameId",
+                                               "ReferencedTable":  "FabricTypeName",
+                                               "ReferencedColumn":  "PK_FabricTypeNameId"
+                                           },
+                                           {
+                                               "ColumnName":  "WeightPerLinearYard",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "SquareInchesPerLinearYard",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FabricRollWidth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "TotalYards",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   }
+               ]
+}
