@@ -28,7 +28,7 @@ Partial Class frmDashboard
         '
         'btnMaterialsDataEntry
         '
-        Me.btnMaterialsDataEntry.Location = New System.Drawing.Point(942, 76)
+        Me.btnMaterialsDataEntry.Location = New System.Drawing.Point(606, 79)
         Me.btnMaterialsDataEntry.Name = "btnMaterialsDataEntry"
         Me.btnMaterialsDataEntry.Size = New System.Drawing.Size(345, 89)
         Me.btnMaterialsDataEntry.TabIndex = 0

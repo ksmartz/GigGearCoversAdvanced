@@ -1,8 +1,8 @@
 Imports System.ComponentModel.DataAnnotations
 
-Public Class Supplier
-    Public Property SupplierId As Integer
-    <Required>
+Public Class SupplierInformation
+
+    Public Property PK_SupplierNameId As Integer
     Public Property CompanyName As String
     Public Property Contact1 As String
     Public Property Contact2 As String
@@ -16,5 +16,4 @@ Public Class Supplier
     Public Property City As String
     Public Property State As String
     Public Property ZipPostal As String
-    Public Overridable Property Fabrics As ICollection(Of Fabric)
 End Class

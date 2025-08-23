@@ -54,7 +54,7 @@ Public Class frmSuppliers
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        Dim supplier As New Supplier With {
+        Dim supplier As New SupplierInformation With {
         .CompanyName = txtCompanyName.Text,
         .Contact1 = txtContact1.Text,
         .Contact2 = txtContact2.Text,

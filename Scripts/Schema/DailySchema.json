@@ -1,6 +1,6 @@
 ﻿{
     "database":  "GigGearCoversDb",
-    "generatedOn":  "2025-08-21T00:06:17",
+    "generatedOn":  "2025-08-21T22:31:03",
     "tables":  [
                    {
                        "name":  "FabricBrandName",
@@ -204,10 +204,18 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "FabricTypeName",
+                                           "ColumnName":  "FabricType",
                                            "DataType":  "nvarchar",
                                            "MaxLength":  200,
                                            "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FabricTypeNameAbbreviation",
+                                           "DataType":  "nchar",
+                                           "MaxLength":  20,
+                                           "IsNullable":  true,
                                            "IsComputed":  false,
                                            "ComputedDefinition":  null
                                        }
@@ -219,7 +227,12 @@
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "FabricTypeName",
+                                               "ColumnName":  "FabricType",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FabricTypeNameAbbreviation",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            }
@@ -245,7 +258,7 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "Name",
+                                           "ColumnName":  "Contact1",
                                            "DataType":  "nvarchar",
                                            "MaxLength":  400,
                                            "IsNullable":  true,
@@ -253,7 +266,15 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "Phone",
+                                           "ColumnName":  "Contact2",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Phone1",
                                            "DataType":  "nvarchar",
                                            "MaxLength":  100,
                                            "IsNullable":  true,
@@ -261,7 +282,15 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "Email",
+                                           "ColumnName":  "Phone2",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Email1",
                                            "DataType":  "nvarchar",
                                            "MaxLength":  200,
                                            "IsNullable":  true,
@@ -269,15 +298,55 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "Website",
+                                           "ColumnName":  "Email2",
                                            "DataType":  "nvarchar",
-                                           "MaxLength":  400,
+                                           "MaxLength":  200,
                                            "IsNullable":  true,
                                            "IsComputed":  false,
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "Address",
+                                           "ColumnName":  "Address1",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Address2",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "City",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "State",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "ZipPostal",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Website",
                                            "DataType":  "nvarchar",
                                            "MaxLength":  600,
                                            "IsNullable":  true,
@@ -297,27 +366,62 @@
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "Name",
+                                               "ColumnName":  "Contact1",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "Phone",
+                                               "ColumnName":  "Contact2",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "Email",
+                                               "ColumnName":  "Phone1",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Phone2",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Email1",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Email2",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Address1",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Address2",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "City",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "State",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "ZipPostal",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            },
                                            {
                                                "ColumnName":  "Website",
-                                               "ReferencedTable":  null,
-                                               "ReferencedColumn":  null
-                                           },
-                                           {
-                                               "ColumnName":  "Address",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            }
