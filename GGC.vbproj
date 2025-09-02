@@ -76,7 +76,14 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\frmAddModelInformation.Designer.vb">
+      <DependentUpon>frmAddModelInformation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAddModelInformation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Data\DbConnectionManager.vb" />
+    <Compile Include="DesignFeature.vb" />
     <Compile Include="Forms\frmDashboard.Designer.vb">
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </Compile>
@@ -95,6 +102,9 @@
     <Compile Include="Forms\frmSuppliers.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Manufacturer.vb" />
+    <Compile Include="Model.vb" />
+    <Compile Include="Models\BrandDisplayItem.vb" />
     <Compile Include="Models\FabricBrandName.vb" />
     <Compile Include="Models\FabricBrandProductName.vb" />
     <Compile Include="Models\FabricPricingHistory.vb" />
@@ -117,9 +127,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ProductCostCalculator.vb" />
     <Compile Include="Program.vb" />
+    <Compile Include="Series.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Forms\frmAddModelInformation.resx">
+      <DependentUpon>frmAddModelInformation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDashboard.resx">
       <DependentUpon>frmDashboard.vb</DependentUpon>
     </EmbeddedResource>

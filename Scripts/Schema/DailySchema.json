@@ -1,7 +1,165 @@
 ﻿{
     "database":  "GigGearCoversDb",
-    "generatedOn":  "2025-08-21T22:31:03",
+    "generatedOn":  "2025-09-01T15:11:24",
     "tables":  [
+                   {
+                       "name":  "AmpHandleLocation",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_AmpHandleLocationId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "AmpHandleLocationName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_AmpHandleLocationId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "AmpHandleLocationName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "AngleType",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_AngleTypeId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "AngleTypeName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_AngleTypeId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "AngleTypeName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "DesignFeature",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_DesignFeatureId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "DesignFeaturesName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "EquipmentType",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "AddedPrice",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  5,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_DesignFeatureId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "DesignFeaturesName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "EquipmentType",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "AddedPrice",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "EquipmentType",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_EquipmentTypeId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "EquipmentTypeName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_EquipmentTypeId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "EquipmentTypeName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
                    {
                        "name":  "FabricBrandName",
                        "columns":  [
@@ -61,6 +219,30 @@
                                            "IsNullable":  false,
                                            "IsComputed":  false,
                                            "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "WeightPerLinearYard",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FabricRollWidth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_FabricTypeNameId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
                                        }
                                    ],
                        "foreignKeys":  [
@@ -78,6 +260,21 @@
                                                "ColumnName":  "FK_FabricBrandNameId",
                                                "ReferencedTable":  "FabricBrandName",
                                                "ReferencedColumn":  "PK_FabricBrandNameId"
+                                           },
+                                           {
+                                               "ColumnName":  "WeightPerLinearYard",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FabricRollWidth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_FabricTypeNameId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
                                            }
                                        ]
                    },
@@ -147,6 +344,30 @@
                                            "IsNullable":  true,
                                            "IsComputed":  false,
                                            "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Quantity",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "MinQuantity",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "MaxQuantity",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
                                        }
                                    ],
                        "foreignKeys":  [
@@ -187,6 +408,21 @@
                                            },
                                            {
                                                "ColumnName":  "WeightPerSquareInch",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Quantity",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "MinQuantity",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "MaxQuantity",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            }
@@ -235,6 +471,424 @@
                                                "ColumnName":  "FabricTypeNameAbbreviation",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "Manufacturer",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_ManufacturerId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "ManufacturerName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_ManufacturerId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "ManufacturerName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "Model",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_ModelId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_SeriesId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "ModelName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Width",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  5,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Depth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  5,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Height",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  5,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "OptionalHeight",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "OptionalDepth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "AngleType",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "TAHWidth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "TAHHeight",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SAHHeight",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SAHWidth",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "AmpHandleLocation",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  100,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "TAHRearOffset",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SAHRearOffset",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SAHTopDownOffset",
+                                           "DataType":  "decimal",
+                                           "MaxLength":  9,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "MusicRestDesign",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Chart_Template",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  200,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "Notes",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  -1,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_AngleTypeId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_AmpHandleLocationId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_ModelId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_SeriesId",
+                                               "ReferencedTable":  "Series",
+                                               "ReferencedColumn":  "PK_SeriesId"
+                                           },
+                                           {
+                                               "ColumnName":  "ModelName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Width",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Depth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Height",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "OptionalHeight",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "OptionalDepth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "AngleType",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "TAHWidth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "TAHHeight",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "SAHHeight",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "SAHWidth",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "AmpHandleLocation",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "TAHRearOffset",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "SAHRearOffset",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "SAHTopDownOffset",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "MusicRestDesign",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Chart_Template",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "Notes",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_AngleTypeId",
+                                               "ReferencedTable":  "AngleType",
+                                               "ReferencedColumn":  "PK_AngleTypeId"
+                                           },
+                                           {
+                                               "ColumnName":  "FK_AmpHandleLocationId",
+                                               "ReferencedTable":  "AmpHandleLocation",
+                                               "ReferencedColumn":  "PK_AmpHandleLocationId"
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "ModelDesignFeature",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "FK_ModelId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_DesignFeatureId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "FK_ModelId",
+                                               "ReferencedTable":  "Model",
+                                               "ReferencedColumn":  "PK_ModelId"
+                                           },
+                                           {
+                                               "ColumnName":  "FK_DesignFeatureId",
+                                               "ReferencedTable":  "DesignFeature",
+                                               "ReferencedColumn":  "PK_DesignFeatureId"
+                                           }
+                                       ]
+                   },
+                   {
+                       "name":  "Series",
+                       "columns":  [
+                                       {
+                                           "ColumnName":  "PK_SeriesId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_ManufacturerId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "SeriesName",
+                                           "DataType":  "nvarchar",
+                                           "MaxLength":  400,
+                                           "IsNullable":  false,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "FK_EquipmentTypeId",
+                                           "DataType":  "int",
+                                           "MaxLength":  4,
+                                           "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       }
+                                   ],
+                       "foreignKeys":  [
+                                           {
+                                               "ColumnName":  "PK_SeriesId",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_ManufacturerId",
+                                               "ReferencedTable":  "Manufacturer",
+                                               "ReferencedColumn":  "PK_ManufacturerId"
+                                           },
+                                           {
+                                               "ColumnName":  "SeriesName",
+                                               "ReferencedTable":  null,
+                                               "ReferencedColumn":  null
+                                           },
+                                           {
+                                               "ColumnName":  "FK_EquipmentTypeId",
+                                               "ReferencedTable":  "EquipmentType",
+                                               "ReferencedColumn":  "PK_EquipmentTypeId"
                                            }
                                        ]
                    },
@@ -463,23 +1117,7 @@
                                            "ComputedDefinition":  null
                                        },
                                        {
-                                           "ColumnName":  "WeightPerLinearYard",
-                                           "DataType":  "decimal",
-                                           "MaxLength":  9,
-                                           "IsNullable":  true,
-                                           "IsComputed":  false,
-                                           "ComputedDefinition":  null
-                                       },
-                                       {
                                            "ColumnName":  "SquareInchesPerLinearYard",
-                                           "DataType":  "decimal",
-                                           "MaxLength":  9,
-                                           "IsNullable":  true,
-                                           "IsComputed":  false,
-                                           "ComputedDefinition":  null
-                                       },
-                                       {
-                                           "ColumnName":  "FabricRollWidth",
                                            "DataType":  "decimal",
                                            "MaxLength":  9,
                                            "IsNullable":  true,
@@ -491,6 +1129,14 @@
                                            "DataType":  "decimal",
                                            "MaxLength":  9,
                                            "IsNullable":  true,
+                                           "IsComputed":  false,
+                                           "ComputedDefinition":  null
+                                       },
+                                       {
+                                           "ColumnName":  "IsActiveForMarketplace",
+                                           "DataType":  "bit",
+                                           "MaxLength":  1,
+                                           "IsNullable":  false,
                                            "IsComputed":  false,
                                            "ComputedDefinition":  null
                                        }
@@ -517,22 +1163,17 @@
                                                "ReferencedColumn":  "PK_FabricTypeNameId"
                                            },
                                            {
-                                               "ColumnName":  "WeightPerLinearYard",
-                                               "ReferencedTable":  null,
-                                               "ReferencedColumn":  null
-                                           },
-                                           {
                                                "ColumnName":  "SquareInchesPerLinearYard",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "FabricRollWidth",
+                                               "ColumnName":  "TotalYards",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            },
                                            {
-                                               "ColumnName":  "TotalYards",
+                                               "ColumnName":  "IsActiveForMarketplace",
                                                "ReferencedTable":  null,
                                                "ReferencedColumn":  null
                                            }

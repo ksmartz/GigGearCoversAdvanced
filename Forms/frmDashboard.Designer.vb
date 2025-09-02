@@ -24,6 +24,7 @@ Partial Class frmDashboard
     Private Sub InitializeComponent()
         Me.btnMaterialsDataEntry = New System.Windows.Forms.Button()
         Me.btnAddSupplier = New System.Windows.Forms.Button()
+        Me.btnAddModels = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnMaterialsDataEntry
@@ -44,11 +45,21 @@ Partial Class frmDashboard
         Me.btnAddSupplier.Text = "Add Supplier"
         Me.btnAddSupplier.UseVisualStyleBackColor = True
         '
+        'btnAddModels
+        '
+        Me.btnAddModels.Location = New System.Drawing.Point(108, 195)
+        Me.btnAddModels.Name = "btnAddModels"
+        Me.btnAddModels.Size = New System.Drawing.Size(202, 68)
+        Me.btnAddModels.TabIndex = 2
+        Me.btnAddModels.Text = "Add Model Information"
+        Me.btnAddModels.UseVisualStyleBackColor = True
+        '
         'frmDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1429, 803)
+        Me.Controls.Add(Me.btnAddModels)
         Me.Controls.Add(Me.btnAddSupplier)
         Me.Controls.Add(Me.btnMaterialsDataEntry)
         Me.Name = "frmDashboard"
@@ -59,4 +70,5 @@ Partial Class frmDashboard
 
     Friend WithEvents btnMaterialsDataEntry As Windows.Forms.Button
     Friend WithEvents btnAddSupplier As Windows.Forms.Button
+    Friend WithEvents btnAddModels As Windows.Forms.Button
 End Class

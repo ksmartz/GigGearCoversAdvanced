@@ -5,60 +5,152 @@ Partial Public Class frmFabricEntryForm
     Inherits Form
 
     Private isFormLoading As Boolean = False
+    Private suppressProductSelectionEvent As Boolean = False
 
     Private Sub frmFabricEntryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         isFormLoading = True
+        Dim db As New DbConnectionManager()
+        Dim suppliers = db.GetAllSuppliers() ' Returns DataTable or List(Of SupplierInformation)
+        cmbSupplier.DataSource = suppliers
+        cmbSupplier.DisplayMember = "SupplierName" ' Adjust to your actual column/property name
+        cmbSupplier.ValueMember = "SupplierID"     ' Adjust to your actual column/property name
 
-        ' Populate Supplier ComboBox
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "SELECT PK_SupplierNameId, CompanyName FROM SupplierInformation"
-                Using reader = cmd.ExecuteReader()
-                    Dim suppliers As New List(Of SupplierInformation)
-                    While reader.Read()
-                        suppliers.Add(New SupplierInformation With {
-                        .PK_SupplierNameId = reader.GetInt32(0),
-                        .CompanyName = reader.GetString(1)
-                    })
-                    End While
-                    cmbSupplier.DataSource = suppliers
-                    cmbSupplier.DisplayMember = "CompanyName"
-                    cmbSupplier.ValueMember = "PK_SupplierNameId"
-                End Using
-            End Using
-        End Using
-
-        cmbSupplier.SelectedIndex = -1
-
-        ' Load all brands (not filtered)
-        LoadAllBrands()
-
-        cmbProduct.DataSource = Nothing
-
-        ' Load fabric types into ComboBox on form load
-        LoadFabricTypeCombo(-1)
-        cmbFabricType.SelectedIndex = -1
-
+        InitializeAssignFabricsGrid()
         isFormLoading = False
     End Sub
-    Private Sub LoadAllBrands()
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "SELECT PK_FabricBrandNameId, BrandName FROM FabricBrandName"
-                Using reader = cmd.ExecuteReader()
-                    Dim brands As New List(Of FabricBrandName)
-                    While reader.Read()
-                        brands.Add(New FabricBrandName With {
-                        .PK_FabricBrandNameId = reader.GetInt32(0),
-                        .BrandName = reader.GetString(1)
-                    })
-                    End While
-                    cmbBrand.DataSource = brands
-                    cmbBrand.DisplayMember = "BrandName"
-                    cmbBrand.ValueMember = "PK_FabricBrandNameId"
-                End Using
-            End Using
-        End Using
+    '' Populate Supplier ComboBox ONLY
+    'Using conn = DbConnectionManager.GetConnection()
+    '    Using cmd = conn.CreateCommand()
+    '        cmd.CommandText = "SELECT PK_SupplierNameId, CompanyName FROM SupplierInformation"
+    '        Using reader = cmd.ExecuteReader()
+    '            Dim suppliers As New List(Of SupplierInformation)
+    '            While reader.Read()
+    '                suppliers.Add(New SupplierInformation With {
+    '                .PK_SupplierNameId = reader.GetInt32(0),
+    '                .CompanyName = reader.GetString(1)
+    '            })
+    '            End While
+    '            cmbSupplier.DataSource = suppliers
+    '            cmbSupplier.DisplayMember = "CompanyName"
+    '            cmbSupplier.ValueMember = "PK_SupplierNameId"
+    '        End Using
+    '    End Using
+    'End Using
+
+    'cmbSupplier.SelectedIndex = -1
+
+    '' Load all brands (not filtered)
+    'LoadAllBrands()
+    'cmbProduct.DataSource = Nothing
+
+    'LoadFabricTypeCombo(-1)
+    'cmbFabricType.SelectedIndex = -1
+
+    '' Clear all textboxes
+    'txtFabricBrandName.Clear()
+    'txtFabricBrandProductName.Clear()
+    'txtWeightPerLinearYard.Clear()
+    'txtFabricRollWidth.Clear()
+    'txtSquareInchesPerLinearYard.Clear()
+    'txtWeightPerSquareInch.Clear()
+    'txtTotalYards.Clear()
+    'txtShippingCost.Clear()
+    'txtCostPerLinearYard.Clear()
+    'txtCostPerSquareInch.Clear()
+    Private Sub InitializeAssignFabricsGrid()
+        dgvAssignFabrics.Columns.Clear()
+
+        ' BrandName dropdown
+        Dim db As New DbConnectionManager()
+        Dim brandNames = db.GetAllFabricBrandNames() ' Returns DataTable or List(Of FabricBrandName)
+        Dim brandCol As New DataGridViewComboBoxColumn With {
+        .Name = "BrandName",
+        .HeaderText = "Brand Name",
+        .DataSource = brandNames,
+        .DisplayMember = "BrandName",
+        .ValueMember = "BrandName"
+    }
+        dgvAssignFabrics.Columns.Add(brandCol)
+
+        ' ProductName dropdown (will be filled dynamically)
+        Dim productCol As New DataGridViewComboBoxColumn With {
+        .Name = "ProductName",
+        .HeaderText = "Product Name"
+    }
+        dgvAssignFabrics.Columns.Add(productCol)
+
+        ' FabricType dropdown
+        Dim fabricTypes = db.GetAllFabricTypes() ' Returns DataTable or List(Of FabricTypeName)
+        Dim typeCol As New DataGridViewComboBoxColumn With {
+        .Name = "FabricType",
+        .HeaderText = "Fabric Type",
+        .DataSource = fabricTypes,
+        .DisplayMember = "FabricType",
+        .ValueMember = "FabricType"
+    }
+        dgvAssignFabrics.Columns.Add(typeCol)
+
+        ' Pricing columns
+        dgvAssignFabrics.Columns.Add("ShippingCost", "Shipping Cost")
+        dgvAssignFabrics.Columns.Add("CostPerLinearYard", "Cost Per Linear Yard")
+        dgvAssignFabrics.Columns.Add("CostPerSquareInch", "Cost Per Square Inch")
+        dgvAssignFabrics.Columns.Add("WeightPerSquareInch", "Weight Per Square Inch")
+        dgvAssignFabrics.Columns.Add("WeightPerLinearYard", "Weight Per Linear Yard")
+        dgvAssignFabrics.Columns.Add("FabricRollWidth", "Fabric Roll Width")
+    End Sub
+    Private Sub dgvAssignFabrics_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles dgvAssignFabrics.EditingControlShowing
+        If dgvAssignFabrics.CurrentCell.ColumnIndex = dgvAssignFabrics.Columns("ProductName").Index Then
+            Dim combo As ComboBox = TryCast(e.Control, ComboBox)
+            If combo IsNot Nothing Then
+                RemoveHandler combo.DropDown, AddressOf ProductNameDropDown
+                AddHandler combo.DropDown, AddressOf ProductNameDropDown
+            End If
+        End If
+    End Sub
+    '*************************************************
+    Private Sub dgvAssignFabrics_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAssignFabrics.CellValueChanged
+        If e.RowIndex < 0 Then Return
+
+        Dim row = dgvAssignFabrics.Rows(e.RowIndex)
+        Dim supplierId = cmbSupplier.SelectedValue
+        Dim brandName = row.Cells("BrandName").Value?.ToString()
+        Dim productName = row.Cells("ProductName").Value?.ToString()
+
+        If String.IsNullOrEmpty(brandName) OrElse String.IsNullOrEmpty(productName) Then Return
+
+        Dim db As New DbConnectionManager()
+        Dim pricing = db.GetFabricPricingHistory(supplierId, brandName, productName) ' Returns object or DataRow
+        Dim productInfo = db.GetFabricProductInfo(brandName, productName) ' Returns object or DataRow
+
+        ' Fill pricing columns if data exists, else leave blank
+        row.Cells("ShippingCost").Value = If(pricing IsNot Nothing, pricing("ShippingCost"), "")
+        row.Cells("CostPerLinearYard").Value = If(pricing IsNot Nothing, pricing("CostPerLinearYard"), "")
+        row.Cells("CostPerSquareInch").Value = If(pricing IsNot Nothing, pricing("CostPerSquareInch"), "")
+        row.Cells("WeightPerSquareInch").Value = If(pricing IsNot Nothing, pricing("WeightPerSquareInch"), "")
+
+        row.Cells("WeightPerLinearYard").Value = If(productInfo IsNot Nothing, productInfo("WeightPerLinearYard"), "")
+        row.Cells("FabricRollWidth").Value = If(productInfo IsNot Nothing, productInfo("FabricRollWidth"), "")
+    End Sub
+
+    Private Sub ProductNameDropDown(sender As Object, e As EventArgs)
+        Dim rowIndex = dgvAssignFabrics.CurrentCell.RowIndex
+        Dim brandName = dgvAssignFabrics.Rows(rowIndex).Cells("BrandName").Value?.ToString()
+        If String.IsNullOrEmpty(brandName) Then Return
+
+        Dim db As New DbConnectionManager()
+        Dim products = db.GetProductsByBrandName(brandName) ' Returns DataTable or List(Of FabricBrandProductName)
+        Dim combo As ComboBox = CType(dgvAssignFabrics.EditingControl, ComboBox)
+        combo.DataSource = products
+        combo.DisplayMember = "ProductName"
+        combo.ValueMember = "ProductName"
+    End Sub
+
+    Private Sub LoadAllBrands() '************REFACTOR TO DB MANAGER
+        Dim db As New DbConnectionManager()
+        Dim brands = db.GetAllFabricBrandNames() ' Should return a List(Of FabricBrandName) or DataTable
+        cmbBrand.DataSource = brands
+        cmbBrand.DisplayMember = "BrandName"
+        cmbBrand.ValueMember = "PK_FabricBrandNameId"
         cmbBrand.SelectedIndex = -1
     End Sub
     Private Sub LoadBrandsForSupplier(supplierId As Integer, Optional selectBrandId As Integer = -1)
@@ -91,97 +183,181 @@ Partial Public Class frmFabricEntryForm
         End If
         cmbBrand.Refresh()
     End Sub
-    Private Sub LoadAllProductsForBrand(brandId As Integer)
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "SELECT PK_FabricBrandProductNameId, BrandProductName FROM FabricBrandProductName WHERE FK_FabricBrandNameId = @BrandId"
-                cmd.Parameters.AddWithValue("@BrandId", brandId)
-                Using reader = cmd.ExecuteReader()
-                    Dim products As New List(Of FabricBrandProductName)
-                    While reader.Read()
-                        products.Add(New FabricBrandProductName With {
-                        .PK_FabricBrandProductNameId = reader.GetInt32(0),
-                        .BrandProductName = reader.GetString(1)
-                    })
-                    End While
-                    cmbProduct.DataSource = products
-                    cmbProduct.DisplayMember = "BrandProductName"
-                    cmbProduct.ValueMember = "PK_FabricBrandProductNameId"
-                End Using
-            End Using
-        End Using
+    Private Sub LoadAllProductsForBrand(brandId As Integer) '************REFACTOR TO DB MANAGER
+        Dim db As New DbConnectionManager()
+        Dim products = db.GetProductsByBrandId(brandId) ' You may need to add this method if not present
+        cmbProduct.DataSource = products
+        cmbProduct.DisplayMember = "BrandProductName"
+        cmbProduct.ValueMember = "PK_FabricBrandProductNameId"
         cmbProduct.SelectedIndex = -1
     End Sub
-    Private Sub LoadProductWeightAndWidth(productId As Integer)
-        Using conn = DbConnectionManager.GetConnection()
-            If conn.State <> ConnectionState.Open Then
-                conn.Open()
-            End If
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "
-                SELECT WeightPerLinearYard, FabricRollWidth
-                FROM FabricBrandProductName
-                WHERE PK_FabricBrandProductNameId = @ProductId"
-                cmd.Parameters.AddWithValue("@ProductId", productId)
-                Using reader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        If Not reader.IsDBNull(0) Then
-                            txtWeightPerLinearYard.Text = reader.GetDecimal(0).ToString()
-                        Else
-                            txtWeightPerLinearYard.Clear()
-                        End If
-                        If Not reader.IsDBNull(1) Then
-                            txtFabricRollWidth.Text = reader.GetDecimal(1).ToString()
-                        Else
-                            txtFabricRollWidth.Clear()
-                        End If
-                    Else
-                        txtWeightPerLinearYard.Clear()
-                        txtFabricRollWidth.Clear()
-                    End If
-                End Using
-            End Using
-        End Using
+    Private Sub LoadProductWeightAndWidth(productId As Integer) '************REFACTOR TO DB MANAGER
+        Dim db As New DbConnectionManager()
+        Dim productInfo = db.GetFabricProductInfoById(productId) ' You may need to add this method
+        If productInfo IsNot Nothing Then
+            txtWeightPerLinearYard.Text = productInfo("WeightPerLinearYard").ToString()
+            txtFabricRollWidth.Text = productInfo("FabricRollWidth").ToString()
+        Else
+            txtWeightPerLinearYard.Clear()
+            txtFabricRollWidth.Clear()
+        End If
     End Sub
 
     Private Sub cmbSupplier_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSupplier.SelectedIndexChanged
         If isFormLoading Then Return
 
+        Dim prevBrandId As Integer = -1
+        Dim prevProductId As Integer = -1
+
+        ' Remember the current brand and product selection
+        If cmbBrand.SelectedValue IsNot Nothing AndAlso TypeOf cmbBrand.SelectedValue Is Integer Then
+            prevBrandId = CInt(cmbBrand.SelectedValue)
+        End If
+        If cmbProduct.SelectedValue IsNot Nothing AndAlso TypeOf cmbProduct.SelectedValue Is Integer Then
+            prevProductId = CInt(cmbProduct.SelectedValue)
+        End If
+
+        ' Clear brand and product selection
         cmbBrand.DataSource = Nothing
         cmbBrand.Items.Clear()
         cmbBrand.DisplayMember = Nothing
         cmbBrand.ValueMember = Nothing
         cmbProduct.DataSource = Nothing
 
-        ' Always reload all fabric types
         LoadFabricTypeCombo(-1)
         cmbFabricType.SelectedIndex = -1
 
-        ClearTextBoxes()
+        ' Always reload all brands
+        LoadAllBrands()
 
-        ' If no supplier is selected, show all brands
-        If cmbSupplier.SelectedValue Is Nothing OrElse Not TypeOf cmbSupplier.SelectedValue Is Integer Then
-            LoadAllBrands()
-            Return
+        If prevBrandId <> -1 Then
+            cmbBrand.SelectedValue = prevBrandId
+            ' Always reload all products for the brand and reselect previous
+            LoadAllProductsForBrand(prevBrandId)
+            If prevProductId <> -1 Then
+                cmbProduct.SelectedValue = prevProductId
+
+                ' Only load product-specific data if both were previously selected
+                Using conn = DbConnectionManager.GetConnection()
+                    Using cmd = conn.CreateCommand()
+                        cmd.CommandText = "
+                        SELECT b.BrandName, p.BrandProductName, p.WeightPerLinearYard, p.FabricRollWidth, p.FK_FabricTypeNameId
+                        FROM FabricBrandProductName p
+                        INNER JOIN FabricBrandName b ON p.FK_FabricBrandNameId = b.PK_FabricBrandNameId
+                        WHERE p.PK_FabricBrandProductNameId = @ProductId"
+                        cmd.Parameters.AddWithValue("@ProductId", prevProductId)
+                        Using reader = cmd.ExecuteReader()
+                            If reader.Read() Then
+                                txtFabricBrandName.Text = reader.GetString(0)
+                                txtFabricBrandProductName.Text = reader.GetString(1)
+                                If Not reader.IsDBNull(2) Then txtWeightPerLinearYard.Text = reader.GetDecimal(2).ToString() Else txtWeightPerLinearYard.Clear()
+                                If Not reader.IsDBNull(3) Then
+                                    txtFabricRollWidth.Text = reader.GetDecimal(3).ToString()
+                                    txtSquareInchesPerLinearYard.Text = (reader.GetDecimal(3) * 36D).ToString()
+                                Else
+                                    txtFabricRollWidth.Clear()
+                                    txtSquareInchesPerLinearYard.Clear()
+                                End If
+                                If Not reader.IsDBNull(4) Then
+                                    cmbFabricType.SelectedValue = reader.GetInt32(4)
+                                Else
+                                    cmbFabricType.SelectedIndex = -1
+                                End If
+                                ' Calculate and fill weight per square inch
+                                If Not reader.IsDBNull(2) AndAlso Not reader.IsDBNull(3) Then
+                                    Dim weight = reader.GetDecimal(2)
+                                    Dim rollWidth = reader.GetDecimal(3)
+                                    Dim sqInches = rollWidth * 36D
+                                    If sqInches > 0 Then
+                                        txtWeightPerSquareInch.Text = Math.Round(weight / sqInches, 5).ToString()
+                                    Else
+                                        txtWeightPerSquareInch.Clear()
+                                    End If
+                                Else
+                                    txtWeightPerSquareInch.Clear()
+                                End If
+                            End If
+                        End Using
+                    End Using
+                End Using
+
+                ' Now, if a supplier is selected, try to load supplier-specific data
+                If cmbSupplier.SelectedValue IsNot Nothing AndAlso TypeOf cmbSupplier.SelectedValue Is Integer Then
+                    Dim supplierId As Integer = CInt(cmbSupplier.SelectedValue)
+                    Using conn = DbConnectionManager.GetConnection()
+                        Using cmd = conn.CreateCommand()
+                            cmd.CommandText = "SELECT PK_SupplierProductNameDataId, SquareInchesPerLinearYard, TotalYards
+                                   FROM SupplierProductNameData
+                                   WHERE FK_SupplierNameId = @SupplierId AND FK_FabricBrandProductNameId = @ProductId"
+                            cmd.Parameters.AddWithValue("@SupplierId", supplierId)
+                            cmd.Parameters.AddWithValue("@ProductId", prevProductId)
+                            Using reader = cmd.ExecuteReader()
+                                If reader.Read() Then
+                                    If Not reader.IsDBNull(2) Then txtTotalYards.Text = reader.GetDecimal(2).ToString() Else txtTotalYards.Clear()
+                                Else
+                                    txtTotalYards.Clear()
+                                    txtShippingCost.Clear()
+                                    txtCostPerLinearYard.Clear()
+                                    txtCostPerSquareInch.Clear()
+                                End If
+                            End Using
+                        End Using
+                    End Using
+                End If
+            Else
+                ' No previous product, so clear product selection and textboxes
+                cmbProduct.SelectedIndex = -1
+                txtFabricBrandName.Clear()
+                txtFabricBrandProductName.Clear()
+                txtWeightPerLinearYard.Clear()
+                txtFabricRollWidth.Clear()
+                txtSquareInchesPerLinearYard.Clear()
+                txtWeightPerSquareInch.Clear()
+                txtTotalYards.Clear()
+                txtShippingCost.Clear()
+                txtCostPerLinearYard.Clear()
+                txtCostPerSquareInch.Clear()
+            End If
+        Else
+            ' No previous brand, so clear brand and product selection and textboxes
+            cmbBrand.SelectedIndex = -1
+            cmbProduct.SelectedIndex = -1
+            txtFabricBrandName.Clear()
+            txtFabricBrandProductName.Clear()
+            txtWeightPerLinearYard.Clear()
+            txtFabricRollWidth.Clear()
+            txtSquareInchesPerLinearYard.Clear()
+            txtWeightPerSquareInch.Clear()
+            txtTotalYards.Clear()
+            txtShippingCost.Clear()
+            txtCostPerLinearYard.Clear()
+            txtCostPerSquareInch.Clear()
         End If
-
-        ' Load brands for the selected supplier
-        Dim supplierId As Integer = CInt(cmbSupplier.SelectedValue)
-        LoadBrandsForSupplier(supplierId)
     End Sub
 
     Private Sub cmbBrand_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBrand.SelectedIndexChanged
+        If isFormLoading Then Return
+
+        suppressProductSelectionEvent = True
+
         cmbProduct.DataSource = Nothing
         LoadFabricTypeCombo(-1)
         cmbFabricType.SelectedIndex = -1
 
         ClearTextBoxes()
 
-        If cmbSupplier.SelectedValue Is Nothing OrElse Not TypeOf cmbSupplier.SelectedValue Is Integer Then Return
+        If cmbSupplier.SelectedValue Is Nothing OrElse Not TypeOf cmbSupplier.SelectedValue Is Integer Then
+            suppressProductSelectionEvent = False
+            Return
+        End If
 
         cmbBrand.SelectedIndex = 0
 
-        If cmbBrand.SelectedValue Is Nothing OrElse Not TypeOf cmbBrand.SelectedValue Is Integer Then Return
+        If cmbBrand.SelectedValue Is Nothing OrElse Not TypeOf cmbBrand.SelectedValue Is Integer Then
+            suppressProductSelectionEvent = False
+            Return
+        End If
+
         Dim brandId As Integer = CInt(cmbBrand.SelectedValue)
 
         If chkAssignToSupplier.Checked Then
@@ -202,9 +378,9 @@ Partial Public Class frmFabricEntryForm
                         Dim products As New List(Of FabricBrandProductName)
                         While reader.Read()
                             products.Add(New FabricBrandProductName With {
-                                .PK_FabricBrandProductNameId = reader.GetInt32(0),
-                                .BrandProductName = reader.GetString(1)
-                            })
+                            .PK_FabricBrandProductNameId = reader.GetInt32(0),
+                            .BrandProductName = reader.GetString(1)
+                        })
                         End While
                         cmbProduct.DataSource = products
                         cmbProduct.DisplayMember = "BrandProductName"
@@ -214,9 +390,13 @@ Partial Public Class frmFabricEntryForm
             End Using
         End If
         cmbProduct.SelectedIndex = -1
+
+        suppressProductSelectionEvent = False
     End Sub
 
-    Private Sub cmbProduct_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProduct.SelectedIndexChanged
+    Private Sub cmbProduct_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProduct.SelectedIndexChanged '************REFACTOR TO DB MANAGER
+        If suppressProductSelectionEvent Then Return
+
         LoadFabricTypeCombo(-1)
         cmbFabricType.SelectedIndex = -1
 
@@ -224,102 +404,98 @@ Partial Public Class frmFabricEntryForm
 
         If cmbProduct.SelectedValue Is Nothing OrElse Not TypeOf cmbProduct.SelectedValue Is Integer Then Return
         Dim productId As Integer = CInt(cmbProduct.SelectedValue)
+        Dim db As New DbConnectionManager()
 
-        ' Load SupplierProductNameData for this product
-        Dim supplierProductNameDataId As Integer = -1
-        Dim fabricTypeId As Integer = -1
+        If chkAssignToSupplier.Checked Then
+            ' Assign mode: Only show product-specific data, clear supplier-specific fields
+            LoadProductWeightAndWidth(productId)
 
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "
-                SELECT TOP 1 PK_SupplierProductNameDataId, FK_FabricTypeNameId, WeightPerLinearYard, SquareInchesPerLinearYard, FabricRollWidth, TotalYards
-                FROM SupplierProductNameData
-                WHERE FK_FabricBrandProductNameId = @ProductId"
-                cmd.Parameters.AddWithValue("@ProductId", productId)
-                Using reader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        supplierProductNameDataId = reader.GetInt32(0)
-                        fabricTypeId = reader.GetInt32(1)
-                        txtSquareInchesPerLinearYard.Text = reader.GetDecimal(3).ToString()
+            ' Fill in the brand and product name textboxes for editing
+            Dim productInfo = db.GetFabricProductInfoById(productId)
+            If productInfo IsNot Nothing Then
+                txtFabricBrandName.Text = productInfo("BrandName").ToString()
+                txtFabricBrandProductName.Text = productInfo("BrandProductName").ToString()
+                If Not IsDBNull(productInfo("FK_FabricTypeNameId")) Then
+                    cmbFabricType.SelectedValue = CInt(productInfo("FK_FabricTypeNameId"))
+                Else
+                    cmbFabricType.SelectedIndex = -1
+                End If
+            End If
 
-                        txtTotalYards.Text = reader.GetDecimal(5).ToString()
-                        LoadFabricTypeCombo(fabricTypeId)
-                    End If
-                End Using
-            End Using
-        End Using
-        ' load weight and width from the product table:
-        LoadProductWeightAndWidth(productId)
-        ' Load latest pricing from FabricPricingHistory
-        If supplierProductNameDataId <> -1 Then
-            Using conn = DbConnectionManager.GetConnection()
-                Using cmd = conn.CreateCommand()
-                    cmd.CommandText = "
-                    SELECT TOP 1 ShippingCost, CostPerLinearYard, CostPerSquareInch, WeightPerSquareInch
-                    FROM FabricPricingHistory
-                    WHERE FK_SupplierProductNameDataId = @SupplierProductNameDataId
-                    ORDER BY DateFrom DESC"
-                    cmd.Parameters.AddWithValue("@SupplierProductNameDataId", supplierProductNameDataId)
-                    Using reader = cmd.ExecuteReader()
-                        If reader.Read() Then
-                            txtShippingCost.Text = reader.GetDecimal(0).ToString()
-                            txtCostPerLinearYard.Text = reader.GetDecimal(1).ToString()
-                            txtCostPerSquareInch.Text = reader.GetDecimal(2).ToString()
-                            txtWeightPerSquareInch.Text = reader.GetDecimal(3).ToString()
-                        End If
-                    End Using
-                End Using
-            End Using
+            ' Clear supplier-specific fields ONLY
+            txtTotalYards.Clear()
+            txtShippingCost.Clear()
+            txtCostPerLinearYard.Clear()
+            txtCostPerSquareInch.Clear()
+            ' DO NOT clear txtWeightPerSquareInch or txtSquareInchesPerLinearYard or txtFabricRollWidth
+            Return
         End If
 
-        ' Fill in the brand and product name textboxes for editing
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "
-                SELECT b.BrandName, p.BrandProductName
-                FROM FabricBrandProductName p
-                INNER JOIN FabricBrandName b ON p.FK_FabricBrandNameId = b.PK_FabricBrandNameId
-                WHERE p.PK_FabricBrandProductNameId = @ProductId"
-                cmd.Parameters.AddWithValue("@ProductId", productId)
-                Using reader = cmd.ExecuteReader()
-                    If reader.Read() Then
-                        txtFabricBrandName.Text = reader.GetString(0)
-                        txtFabricBrandProductName.Text = reader.GetString(1)
-                    End If
-                End Using
-            End Using
-        End Using
+        ' Not in assign mode: Load supplier-specific data as before
+        Dim supplierProductNameDataId As Integer = -1
+        Dim fabricTypeId As Integer = -1
+        Dim squareInchesPerLinearYard As Decimal = 0D
+        Dim totalYards As Decimal = 0D
+
+        If cmbSupplier.SelectedValue IsNot Nothing AndAlso TypeOf cmbSupplier.SelectedValue Is Integer Then
+            Dim supplierId As Integer = CInt(cmbSupplier.SelectedValue)
+
+            ' Use helper to get supplier-product data
+            Dim supplierProduct = db.GetSupplierProductNameData(supplierId, productId)
+            If supplierProduct IsNot Nothing Then
+                If Not IsDBNull(supplierProduct("PK_SupplierProductNameDataId")) Then supplierProductNameDataId = CInt(supplierProduct("PK_SupplierProductNameDataId"))
+                If Not IsDBNull(supplierProduct("FK_FabricTypeNameId")) Then fabricTypeId = CInt(supplierProduct("FK_FabricTypeNameId"))
+                If Not IsDBNull(supplierProduct("SquareInchesPerLinearYard")) Then squareInchesPerLinearYard = CDec(supplierProduct("SquareInchesPerLinearYard"))
+                If Not IsDBNull(supplierProduct("TotalYards")) Then totalYards = CDec(supplierProduct("TotalYards"))
+                txtSquareInchesPerLinearYard.Text = squareInchesPerLinearYard.ToString()
+                txtTotalYards.Text = totalYards.ToString()
+                LoadFabricTypeCombo(fabricTypeId)
+            End If
+
+            ' Load weight and width from the product table
+            Dim productInfo = db.GetFabricProductInfoById(productId)
+            If productInfo IsNot Nothing Then
+                txtWeightPerLinearYard.Text = productInfo("WeightPerLinearYard").ToString()
+                txtFabricRollWidth.Text = productInfo("FabricRollWidth").ToString()
+                txtFabricBrandName.Text = productInfo("BrandName").ToString()
+                txtFabricBrandProductName.Text = productInfo("BrandProductName").ToString()
+                If Not IsDBNull(productInfo("FK_FabricTypeNameId")) Then
+                    cmbFabricType.SelectedValue = CInt(productInfo("FK_FabricTypeNameId"))
+                End If
+                ' Calculate and fill weight per square inch
+                Dim weight As Decimal = 0D
+                Dim rollWidth As Decimal = 0D
+                If Not IsDBNull(productInfo("WeightPerLinearYard")) Then weight = CDec(productInfo("WeightPerLinearYard"))
+                If Not IsDBNull(productInfo("FabricRollWidth")) Then rollWidth = CDec(productInfo("FabricRollWidth"))
+                Dim sqInches = rollWidth * 36D
+                If sqInches > 0 Then
+                    txtWeightPerSquareInch.Text = Math.Round(weight / sqInches, 5).ToString()
+                Else
+                    txtWeightPerSquareInch.Clear()
+                End If
+            End If
+
+            ' Load latest pricing from FabricPricingHistory using helper
+            Dim pricing = db.GetFabricPricingHistoryByProductId(supplierId, productId)
+            If pricing IsNot Nothing Then
+                txtShippingCost.Text = pricing("ShippingCost").ToString()
+                txtCostPerLinearYard.Text = pricing("CostPerLinearYard").ToString()
+                txtCostPerSquareInch.Text = pricing("CostPerSquareInch").ToString()
+                txtWeightPerSquareInch.Text = pricing("WeightPerSquareInch").ToString()
+            End If
+        End If
     End Sub
 
-    Private Sub LoadFabricTypeCombo(selectedId As Integer)
-        Using conn = DbConnectionManager.GetConnection()
-            Using cmd = conn.CreateCommand()
-                cmd.CommandText = "SELECT PK_FabricTypeNameId, FabricType FROM FabricTypeName"
-                Using reader = cmd.ExecuteReader()
-                    Dim types As New List(Of FabricTypeName)
-                    While reader.Read()
-                        types.Add(New FabricTypeName With {
-                            .PK_FabricTypeNameId = reader.GetInt32(0),
-                            .FabricType = reader.GetString(1)
-                        })
-                    End While
-                    cmbFabricType.DataSource = types
-                    cmbFabricType.DisplayMember = "FabricType"
-                    cmbFabricType.ValueMember = "PK_FabricTypeNameId"
-                End Using
-            End Using
-        End Using
+    Private Sub LoadFabricTypeCombo(selectedId As Integer) '************REFACTOR TO DB MANAGER
+        Dim db As New DbConnectionManager()
+        Dim types = db.GetAllFabricTypes()
+        cmbFabricType.DataSource = types
+        cmbFabricType.DisplayMember = "FabricType"
+        cmbFabricType.ValueMember = "PK_FabricTypeNameId"
         cmbFabricType.SelectedValue = selectedId
     End Sub
 
-    Private Sub ClearTextBoxes()
-        txtWeightPerLinearYard.Clear()
-        txtFabricRollWidth.Clear()
-        txtTotalYards.Clear()
-        txtShippingCost.Clear()
-        txtCostPerLinearYard.Clear()
-        ' Add any other textboxes you want to clear
-    End Sub
+
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
@@ -420,22 +596,23 @@ Partial Public Class frmFabricEntryForm
             Dim newSupplierProductId As Integer
             newSupplierProductId = InsertSupplierProductNameData(supplierId, productId, fabricTypeId, weight, squareInchesPerLinearYard, rollWidth, totalYards, isActive)
 
-            ' Insert into FabricPricingHistory
+            ' Insert into FabricPricingHistory with Quantity = totalYards
             Using conn = DbConnectionManager.GetConnection()
                 If conn.State <> ConnectionState.Open Then
                     conn.Open()
                 End If
                 Using cmd = conn.CreateCommand()
                     cmd.CommandText =
-            "INSERT INTO FabricPricingHistory " &
-            "(FK_SupplierProductNameDataId, DateFrom, ShippingCost, CostPerLinearYard, CostPerSquareInch, WeightPerSquareInch) " &
-            "VALUES (@SupplierProductNameDataId, @DateFrom, @ShippingCost, @CostPerLinearYard, @CostPerSquareInch, @WeightPerSquareInch)"
+"INSERT INTO FabricPricingHistory " &
+"(FK_SupplierProductNameDataId, DateFrom, ShippingCost, CostPerLinearYard, CostPerSquareInch, WeightPerSquareInch, Quantity) " &
+"VALUES (@SupplierProductNameDataId, @DateFrom, @ShippingCost, @CostPerLinearYard, @CostPerSquareInch, @WeightPerSquareInch, @Quantity)"
                     cmd.Parameters.AddWithValue("@SupplierProductNameDataId", newSupplierProductId)
                     cmd.Parameters.AddWithValue("@DateFrom", Date.Now)
                     cmd.Parameters.AddWithValue("@ShippingCost", shippingCost)
                     cmd.Parameters.AddWithValue("@CostPerLinearYard", costPerLinearYard)
                     cmd.Parameters.AddWithValue("@CostPerSquareInch", costPerSquareInch)
                     cmd.Parameters.AddWithValue("@WeightPerSquareInch", weightPerSquareInch)
+                    cmd.Parameters.AddWithValue("@Quantity", totalYards)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
@@ -495,20 +672,22 @@ Partial Public Class frmFabricEntryForm
     End Sub
 
     Private Sub chkAssignToSupplier_CheckedChanged(sender As Object, e As EventArgs) Handles chkAssignToSupplier.CheckedChanged
-        If chkAssignToSupplier.Checked Then
-            ' Show all brands
-            LoadAllBrands()
-            cmbProduct.DataSource = Nothing
-        Else
-            ' Show only brands for the selected supplier
-            If cmbSupplier.SelectedValue IsNot Nothing AndAlso TypeOf cmbSupplier.SelectedValue Is Integer Then
-                LoadBrandsForSupplier(CInt(cmbSupplier.SelectedValue))
-            Else
-                LoadAllBrands()
-            End If
-            cmbProduct.DataSource = Nothing
-        End If
+        ' Only clear supplier-specific fields
+        txtTotalYards.Clear()
+        txtShippingCost.Clear()
+        txtCostPerLinearYard.Clear()
+        txtCostPerSquareInch.Clear()
+        ' DO NOT clear or reset cmbProduct, cmbFabricType, or any product-specific fields here!
     End Sub
+    Private Sub ClearTextBoxes()
+        txtTotalYards.Clear()
+        txtShippingCost.Clear()
+        txtCostPerLinearYard.Clear()
+        txtCostPerSquareInch.Clear()
+        ' Do NOT clear product-specific fields here!
+    End Sub
+
+
 
     Private Function InsertSupplierProductNameData(
     supplierId As Integer,
@@ -544,4 +723,77 @@ Partial Public Class frmFabricEntryForm
         End Using
         Return newSupplierProductId
     End Function
+
+    Private Sub LoadAllBrandsWithSupplierMark(supplierId As Integer)
+        Dim allBrands As New List(Of BrandDisplayItem)
+        Dim supplierBrandIds As New HashSet(Of Integer)
+
+        ' Get all brands associated with the supplier
+        If supplierId > 0 Then
+            Using conn = DbConnectionManager.GetConnection()
+                Using cmd = conn.CreateCommand()
+                    cmd.CommandText = "SELECT DISTINCT b.PK_FabricBrandNameId
+                                   FROM SupplierProductNameData s
+                                   INNER JOIN FabricBrandProductName p ON s.FK_FabricBrandProductNameId = p.PK_FabricBrandProductNameId
+                                   INNER JOIN FabricBrandName b ON p.FK_FabricBrandNameId = b.PK_FabricBrandNameId
+                                   WHERE s.FK_SupplierNameId = @SupplierId"
+                    cmd.Parameters.AddWithValue("@SupplierId", supplierId)
+                    Using reader = cmd.ExecuteReader()
+                        While reader.Read()
+                            supplierBrandIds.Add(reader.GetInt32(0))
+                        End While
+                    End Using
+                End Using
+            End Using
+        End If
+
+        ' Get all brands
+        Using conn = DbConnectionManager.GetConnection()
+            Using cmd = conn.CreateCommand()
+                cmd.CommandText = "SELECT PK_FabricBrandNameId, BrandName FROM FabricBrandName"
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim id = reader.GetInt32(0)
+                        allBrands.Add(New BrandDisplayItem With {
+                        .PK_FabricBrandNameId = id,
+                        .BrandName = reader.GetString(1),
+                        .IsSupplierBrand = supplierBrandIds.Contains(id)
+                    })
+                    End While
+                End Using
+            End Using
+        End Using
+
+        cmbBrand.DataSource = allBrands
+        cmbBrand.DisplayMember = "DisplayText"
+        cmbBrand.ValueMember = "PK_FabricBrandNameId"
+        cmbBrand.SelectedIndex = -1
+    End Sub
+
+    Private Sub lblAddEditProductName_Click(sender As Object, e As EventArgs) Handles lblAddEditProductName.Click
+
+    End Sub
+
+    Private Sub txtShippingCost_TextChanged(sender As Object, e As EventArgs) Handles txtShippingCost.TextChanged
+
+    End Sub
+
+    Private Sub txtAddFabricType_TextChanged(sender As Object, e As EventArgs) Handles txtAddFabricType.TextChanged
+
+    End Sub
+End Class
+
+Public Class ProductDisplayItem
+    Public Property PK_FabricBrandProductNameId As Integer
+    Public Property BrandProductName As String
+    Public Property IsSupplierProduct As Boolean
+    Public ReadOnly Property DisplayText As String
+        Get
+            If IsSupplierProduct Then
+                Return "★ " & BrandProductName
+            Else
+                Return BrandProductName
+            End If
+        End Get
+    End Property
 End Class
