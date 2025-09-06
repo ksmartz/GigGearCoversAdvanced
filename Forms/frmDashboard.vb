@@ -1,4 +1,7 @@
-﻿Public Class frmDashboard
+﻿Imports System.Text.Json
+Imports System.Windows.Forms
+
+Public Class frmDashboard
     Private Sub btnAddSupplier_Click(sender As Object, e As EventArgs) Handles btnAddSupplier.Click
         Dim supplierForm As New frmSuppliers()
         supplierForm.ShowDialog()
@@ -19,4 +22,6 @@
     Private Sub frmDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+
 End Class

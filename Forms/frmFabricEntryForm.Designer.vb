@@ -59,125 +59,128 @@ Partial Class frmFabricEntryForm
         Me.lblFabricTypeNameAbbreviation = New System.Windows.Forms.Label()
         Me.chkAssignToSupplier = New System.Windows.Forms.CheckBox()
         Me.dgvAssignFabrics = New System.Windows.Forms.DataGridView()
+        Me.btnClearSupplier = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbColor = New System.Windows.Forms.ComboBox()
         CType(Me.dgvAssignFabrics, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'cmbSupplier
         '
         Me.cmbSupplier.FormattingEnabled = True
-        Me.cmbSupplier.Location = New System.Drawing.Point(12, 51)
+        Me.cmbSupplier.Location = New System.Drawing.Point(275, 57)
         Me.cmbSupplier.Name = "cmbSupplier"
         Me.cmbSupplier.Size = New System.Drawing.Size(169, 28)
         Me.cmbSupplier.TabIndex = 0
         '
         'cmbBrand
         '
-        Me.cmbBrand.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbBrand.FormattingEnabled = True
-        Me.cmbBrand.Location = New System.Drawing.Point(12, 116)
+        Me.cmbBrand.Location = New System.Drawing.Point(275, 145)
         Me.cmbBrand.Name = "cmbBrand"
         Me.cmbBrand.Size = New System.Drawing.Size(169, 28)
         Me.cmbBrand.TabIndex = 1
         '
         'cmbFabricType
         '
+        Me.cmbFabricType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbFabricType.FormattingEnabled = True
-        Me.cmbFabricType.Location = New System.Drawing.Point(12, 246)
+        Me.cmbFabricType.Location = New System.Drawing.Point(275, 415)
         Me.cmbFabricType.Name = "cmbFabricType"
-        Me.cmbFabricType.Size = New System.Drawing.Size(169, 28)
-        Me.cmbFabricType.TabIndex = 2
+        Me.cmbFabricType.Size = New System.Drawing.Size(306, 28)
+        Me.cmbFabricType.TabIndex = 4
         '
         'cmbProduct
         '
         Me.cmbProduct.FormattingEnabled = True
-        Me.cmbProduct.Location = New System.Drawing.Point(12, 182)
+        Me.cmbProduct.Location = New System.Drawing.Point(275, 226)
         Me.cmbProduct.Name = "cmbProduct"
         Me.cmbProduct.Size = New System.Drawing.Size(169, 28)
-        Me.cmbProduct.TabIndex = 3
+        Me.cmbProduct.TabIndex = 2
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(12, 293)
+        Me.btnSave.Location = New System.Drawing.Point(10, 167)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(203, 59)
-        Me.btnSave.TabIndex = 4
+        Me.btnSave.TabIndex = 15
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'txtShippingCost
         '
-        Me.txtShippingCost.Location = New System.Drawing.Point(437, 180)
+        Me.txtShippingCost.Location = New System.Drawing.Point(795, 147)
         Me.txtShippingCost.Name = "txtShippingCost"
         Me.txtShippingCost.Size = New System.Drawing.Size(150, 26)
-        Me.txtShippingCost.TabIndex = 5
+        Me.txtShippingCost.TabIndex = 7
         '
         'txtCostPerLinearYard
         '
-        Me.txtCostPerLinearYard.Location = New System.Drawing.Point(437, 246)
+        Me.txtCostPerLinearYard.Location = New System.Drawing.Point(795, 228)
         Me.txtCostPerLinearYard.Name = "txtCostPerLinearYard"
         Me.txtCostPerLinearYard.Size = New System.Drawing.Size(150, 26)
-        Me.txtCostPerLinearYard.TabIndex = 6
+        Me.txtCostPerLinearYard.TabIndex = 8
         '
         'txtWeightPerLinearYard
         '
-        Me.txtWeightPerLinearYard.Location = New System.Drawing.Point(437, 321)
+        Me.txtWeightPerLinearYard.Location = New System.Drawing.Point(795, 322)
         Me.txtWeightPerLinearYard.Name = "txtWeightPerLinearYard"
         Me.txtWeightPerLinearYard.Size = New System.Drawing.Size(150, 26)
-        Me.txtWeightPerLinearYard.TabIndex = 7
+        Me.txtWeightPerLinearYard.TabIndex = 9
         '
         'txtSquareInchesPerLinearYard
         '
-        Me.txtSquareInchesPerLinearYard.Location = New System.Drawing.Point(680, 53)
+        Me.txtSquareInchesPerLinearYard.Location = New System.Drawing.Point(1065, 147)
         Me.txtSquareInchesPerLinearYard.Name = "txtSquareInchesPerLinearYard"
         Me.txtSquareInchesPerLinearYard.Size = New System.Drawing.Size(150, 26)
-        Me.txtSquareInchesPerLinearYard.TabIndex = 8
+        Me.txtSquareInchesPerLinearYard.TabIndex = 16
         '
         'txtFabricRollWidth
         '
-        Me.txtFabricRollWidth.Location = New System.Drawing.Point(680, 111)
+        Me.txtFabricRollWidth.Location = New System.Drawing.Point(795, 415)
         Me.txtFabricRollWidth.Name = "txtFabricRollWidth"
         Me.txtFabricRollWidth.Size = New System.Drawing.Size(150, 26)
-        Me.txtFabricRollWidth.TabIndex = 9
+        Me.txtFabricRollWidth.TabIndex = 10
         '
         'txtWeightPerSquareInch
         '
-        Me.txtWeightPerSquareInch.Location = New System.Drawing.Point(680, 324)
+        Me.txtWeightPerSquareInch.Location = New System.Drawing.Point(1065, 322)
         Me.txtWeightPerSquareInch.Name = "txtWeightPerSquareInch"
         Me.txtWeightPerSquareInch.Size = New System.Drawing.Size(150, 26)
-        Me.txtWeightPerSquareInch.TabIndex = 10
+        Me.txtWeightPerSquareInch.TabIndex = 18
         '
         'txtTotalYards
         '
-        Me.txtTotalYards.Location = New System.Drawing.Point(680, 180)
+        Me.txtTotalYards.Location = New System.Drawing.Point(795, 507)
         Me.txtTotalYards.Name = "txtTotalYards"
         Me.txtTotalYards.Size = New System.Drawing.Size(150, 26)
         Me.txtTotalYards.TabIndex = 11
         '
         'txtCostPerSquareInch
         '
-        Me.txtCostPerSquareInch.Location = New System.Drawing.Point(680, 246)
+        Me.txtCostPerSquareInch.Location = New System.Drawing.Point(1065, 228)
         Me.txtCostPerSquareInch.Name = "txtCostPerSquareInch"
         Me.txtCostPerSquareInch.Size = New System.Drawing.Size(150, 26)
-        Me.txtCostPerSquareInch.TabIndex = 12
+        Me.txtCostPerSquareInch.TabIndex = 17
         '
         'txtFabricBrandName
         '
-        Me.txtFabricBrandName.Location = New System.Drawing.Point(437, 52)
+        Me.txtFabricBrandName.Location = New System.Drawing.Point(795, 61)
         Me.txtFabricBrandName.Name = "txtFabricBrandName"
         Me.txtFabricBrandName.Size = New System.Drawing.Size(203, 26)
-        Me.txtFabricBrandName.TabIndex = 13
+        Me.txtFabricBrandName.TabIndex = 5
         '
         'txtFabricBrandProductName
         '
-        Me.txtFabricBrandProductName.Location = New System.Drawing.Point(437, 111)
+        Me.txtFabricBrandProductName.Location = New System.Drawing.Point(1065, 61)
         Me.txtFabricBrandProductName.Name = "txtFabricBrandProductName"
         Me.txtFabricBrandProductName.Size = New System.Drawing.Size(203, 26)
-        Me.txtFabricBrandProductName.TabIndex = 14
+        Me.txtFabricBrandProductName.TabIndex = 6
         '
         'lblSupplier
         '
         Me.lblSupplier.AutoSize = True
-        Me.lblSupplier.Location = New System.Drawing.Point(12, 24)
+        Me.lblSupplier.Location = New System.Drawing.Point(271, 24)
         Me.lblSupplier.Name = "lblSupplier"
         Me.lblSupplier.Size = New System.Drawing.Size(67, 20)
         Me.lblSupplier.TabIndex = 15
@@ -186,7 +189,7 @@ Partial Class frmFabricEntryForm
         'lblProductBrand
         '
         Me.lblProductBrand.AutoSize = True
-        Me.lblProductBrand.Location = New System.Drawing.Point(12, 88)
+        Me.lblProductBrand.Location = New System.Drawing.Point(271, 112)
         Me.lblProductBrand.Name = "lblProductBrand"
         Me.lblProductBrand.Size = New System.Drawing.Size(52, 20)
         Me.lblProductBrand.TabIndex = 16
@@ -195,7 +198,7 @@ Partial Class frmFabricEntryForm
         'lblProductName
         '
         Me.lblProductName.AutoSize = True
-        Me.lblProductName.Location = New System.Drawing.Point(12, 156)
+        Me.lblProductName.Location = New System.Drawing.Point(271, 192)
         Me.lblProductName.Name = "lblProductName"
         Me.lblProductName.Size = New System.Drawing.Size(110, 20)
         Me.lblProductName.TabIndex = 17
@@ -204,7 +207,7 @@ Partial Class frmFabricEntryForm
         'lblFabricType
         '
         Me.lblFabricType.AutoSize = True
-        Me.lblFabricType.Location = New System.Drawing.Point(12, 223)
+        Me.lblFabricType.Location = New System.Drawing.Point(271, 371)
         Me.lblFabricType.Name = "lblFabricType"
         Me.lblFabricType.Size = New System.Drawing.Size(91, 20)
         Me.lblFabricType.TabIndex = 18
@@ -213,7 +216,7 @@ Partial Class frmFabricEntryForm
         'lblAddBrandName
         '
         Me.lblAddBrandName.AutoSize = True
-        Me.lblAddBrandName.Location = New System.Drawing.Point(433, 24)
+        Me.lblAddBrandName.Location = New System.Drawing.Point(791, 24)
         Me.lblAddBrandName.Name = "lblAddBrandName"
         Me.lblAddBrandName.Size = New System.Drawing.Size(163, 20)
         Me.lblAddBrandName.TabIndex = 19
@@ -222,7 +225,7 @@ Partial Class frmFabricEntryForm
         'lblAddEditProductName
         '
         Me.lblAddEditProductName.AutoSize = True
-        Me.lblAddEditProductName.Location = New System.Drawing.Point(433, 88)
+        Me.lblAddEditProductName.Location = New System.Drawing.Point(1061, 24)
         Me.lblAddEditProductName.Name = "lblAddEditProductName"
         Me.lblAddEditProductName.Size = New System.Drawing.Size(175, 20)
         Me.lblAddEditProductName.TabIndex = 20
@@ -231,7 +234,7 @@ Partial Class frmFabricEntryForm
         'lblShippingCost
         '
         Me.lblShippingCost.AutoSize = True
-        Me.lblShippingCost.Location = New System.Drawing.Point(433, 152)
+        Me.lblShippingCost.Location = New System.Drawing.Point(791, 112)
         Me.lblShippingCost.Name = "lblShippingCost"
         Me.lblShippingCost.Size = New System.Drawing.Size(108, 20)
         Me.lblShippingCost.TabIndex = 21
@@ -240,7 +243,7 @@ Partial Class frmFabricEntryForm
         'lblCostPerLinearYard
         '
         Me.lblCostPerLinearYard.AutoSize = True
-        Me.lblCostPerLinearYard.Location = New System.Drawing.Point(433, 219)
+        Me.lblCostPerLinearYard.Location = New System.Drawing.Point(791, 192)
         Me.lblCostPerLinearYard.Name = "lblCostPerLinearYard"
         Me.lblCostPerLinearYard.Size = New System.Drawing.Size(136, 20)
         Me.lblCostPerLinearYard.TabIndex = 22
@@ -249,7 +252,7 @@ Partial Class frmFabricEntryForm
         'lblWeightPerLinearYard
         '
         Me.lblWeightPerLinearYard.AutoSize = True
-        Me.lblWeightPerLinearYard.Location = New System.Drawing.Point(433, 289)
+        Me.lblWeightPerLinearYard.Location = New System.Drawing.Point(791, 279)
         Me.lblWeightPerLinearYard.Name = "lblWeightPerLinearYard"
         Me.lblWeightPerLinearYard.Size = New System.Drawing.Size(145, 20)
         Me.lblWeightPerLinearYard.TabIndex = 23
@@ -258,7 +261,7 @@ Partial Class frmFabricEntryForm
         'lblSquareInchesPerLinearYard
         '
         Me.lblSquareInchesPerLinearYard.AutoSize = True
-        Me.lblSquareInchesPerLinearYard.Location = New System.Drawing.Point(676, 24)
+        Me.lblSquareInchesPerLinearYard.Location = New System.Drawing.Point(1061, 112)
         Me.lblSquareInchesPerLinearYard.Name = "lblSquareInchesPerLinearYard"
         Me.lblSquareInchesPerLinearYard.Size = New System.Drawing.Size(171, 20)
         Me.lblSquareInchesPerLinearYard.TabIndex = 24
@@ -267,7 +270,7 @@ Partial Class frmFabricEntryForm
         'lblFabricRollWidth
         '
         Me.lblFabricRollWidth.AutoSize = True
-        Me.lblFabricRollWidth.Location = New System.Drawing.Point(676, 88)
+        Me.lblFabricRollWidth.Location = New System.Drawing.Point(791, 371)
         Me.lblFabricRollWidth.Name = "lblFabricRollWidth"
         Me.lblFabricRollWidth.Size = New System.Drawing.Size(129, 20)
         Me.lblFabricRollWidth.TabIndex = 25
@@ -276,16 +279,16 @@ Partial Class frmFabricEntryForm
         'lblTotalYards
         '
         Me.lblTotalYards.AutoSize = True
-        Me.lblTotalYards.Location = New System.Drawing.Point(676, 152)
+        Me.lblTotalYards.Location = New System.Drawing.Point(791, 468)
         Me.lblTotalYards.Name = "lblTotalYards"
-        Me.lblTotalYards.Size = New System.Drawing.Size(101, 20)
+        Me.lblTotalYards.Size = New System.Drawing.Size(90, 20)
         Me.lblTotalYards.TabIndex = 26
-        Me.lblTotalYards.Text = "lblTotalYards"
+        Me.lblTotalYards.Text = "Total Yards"
         '
         'lblCostPerSquareInch
         '
         Me.lblCostPerSquareInch.AutoSize = True
-        Me.lblCostPerSquareInch.Location = New System.Drawing.Point(676, 219)
+        Me.lblCostPerSquareInch.Location = New System.Drawing.Point(1061, 192)
         Me.lblCostPerSquareInch.Name = "lblCostPerSquareInch"
         Me.lblCostPerSquareInch.Size = New System.Drawing.Size(133, 20)
         Me.lblCostPerSquareInch.TabIndex = 27
@@ -294,7 +297,7 @@ Partial Class frmFabricEntryForm
         'lblWeightPerSquareInch
         '
         Me.lblWeightPerSquareInch.AutoSize = True
-        Me.lblWeightPerSquareInch.Location = New System.Drawing.Point(676, 289)
+        Me.lblWeightPerSquareInch.Location = New System.Drawing.Point(1061, 279)
         Me.lblWeightPerSquareInch.Name = "lblWeightPerSquareInch"
         Me.lblWeightPerSquareInch.Size = New System.Drawing.Size(146, 20)
         Me.lblWeightPerSquareInch.TabIndex = 28
@@ -303,7 +306,7 @@ Partial Class frmFabricEntryForm
         'lbAddFabricType
         '
         Me.lbAddFabricType.AutoSize = True
-        Me.lbAddFabricType.Location = New System.Drawing.Point(994, 36)
+        Me.lbAddFabricType.Location = New System.Drawing.Point(1488, 24)
         Me.lbAddFabricType.Name = "lbAddFabricType"
         Me.lbAddFabricType.Size = New System.Drawing.Size(124, 20)
         Me.lbAddFabricType.TabIndex = 30
@@ -311,41 +314,41 @@ Partial Class frmFabricEntryForm
         '
         'txtAddFabricType
         '
-        Me.txtAddFabricType.Location = New System.Drawing.Point(968, 59)
+        Me.txtAddFabricType.Location = New System.Drawing.Point(1462, 61)
         Me.txtAddFabricType.Name = "txtAddFabricType"
         Me.txtAddFabricType.Size = New System.Drawing.Size(150, 26)
-        Me.txtAddFabricType.TabIndex = 29
+        Me.txtAddFabricType.TabIndex = 19
         '
         'btnAddFabricType
         '
-        Me.btnAddFabricType.Location = New System.Drawing.Point(915, 211)
+        Me.btnAddFabricType.Location = New System.Drawing.Point(1462, 195)
         Me.btnAddFabricType.Name = "btnAddFabricType"
-        Me.btnAddFabricType.Size = New System.Drawing.Size(203, 59)
-        Me.btnAddFabricType.TabIndex = 31
+        Me.btnAddFabricType.Size = New System.Drawing.Size(150, 59)
+        Me.btnAddFabricType.TabIndex = 21
         Me.btnAddFabricType.Text = "Add Fabric Type"
         Me.btnAddFabricType.UseVisualStyleBackColor = True
         '
         'chkIsActiveForMarketPlace
         '
         Me.chkIsActiveForMarketPlace.AutoSize = True
-        Me.chkIsActiveForMarketPlace.Location = New System.Drawing.Point(206, 103)
+        Me.chkIsActiveForMarketPlace.Location = New System.Drawing.Point(21, 108)
         Me.chkIsActiveForMarketPlace.Name = "chkIsActiveForMarketPlace"
         Me.chkIsActiveForMarketPlace.Size = New System.Drawing.Size(192, 24)
-        Me.chkIsActiveForMarketPlace.TabIndex = 32
+        Me.chkIsActiveForMarketPlace.TabIndex = 13
         Me.chkIsActiveForMarketPlace.Text = "Active for Marketplace"
         Me.chkIsActiveForMarketPlace.UseVisualStyleBackColor = True
         '
         'txtFabricTypeNameAbbreviation
         '
-        Me.txtFabricTypeNameAbbreviation.Location = New System.Drawing.Point(968, 152)
+        Me.txtFabricTypeNameAbbreviation.Location = New System.Drawing.Point(1462, 147)
         Me.txtFabricTypeNameAbbreviation.Name = "txtFabricTypeNameAbbreviation"
         Me.txtFabricTypeNameAbbreviation.Size = New System.Drawing.Size(150, 26)
-        Me.txtFabricTypeNameAbbreviation.TabIndex = 33
+        Me.txtFabricTypeNameAbbreviation.TabIndex = 20
         '
         'lblFabricTypeNameAbbreviation
         '
         Me.lblFabricTypeNameAbbreviation.AutoSize = True
-        Me.lblFabricTypeNameAbbreviation.Location = New System.Drawing.Point(978, 107)
+        Me.lblFabricTypeNameAbbreviation.Location = New System.Drawing.Point(1472, 112)
         Me.lblFabricTypeNameAbbreviation.Name = "lblFabricTypeNameAbbreviation"
         Me.lblFabricTypeNameAbbreviation.Size = New System.Drawing.Size(140, 20)
         Me.lblFabricTypeNameAbbreviation.TabIndex = 34
@@ -354,28 +357,57 @@ Partial Class frmFabricEntryForm
         'chkAssignToSupplier
         '
         Me.chkAssignToSupplier.AutoSize = True
-        Me.chkAssignToSupplier.Location = New System.Drawing.Point(206, 51)
+        Me.chkAssignToSupplier.Location = New System.Drawing.Point(21, 61)
         Me.chkAssignToSupplier.Name = "chkAssignToSupplier"
         Me.chkAssignToSupplier.Size = New System.Drawing.Size(163, 24)
-        Me.chkAssignToSupplier.TabIndex = 35
+        Me.chkAssignToSupplier.TabIndex = 12
         Me.chkAssignToSupplier.Text = "Assign to Supplier"
         Me.chkAssignToSupplier.UseVisualStyleBackColor = True
         '
         'dgvAssignFabrics
         '
         Me.dgvAssignFabrics.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvAssignFabrics.Location = New System.Drawing.Point(39, 492)
+        Me.dgvAssignFabrics.Location = New System.Drawing.Point(12, 539)
         Me.dgvAssignFabrics.Name = "dgvAssignFabrics"
         Me.dgvAssignFabrics.RowHeadersWidth = 62
         Me.dgvAssignFabrics.RowTemplate.Height = 28
-        Me.dgvAssignFabrics.Size = New System.Drawing.Size(1167, 216)
-        Me.dgvAssignFabrics.TabIndex = 36
+        Me.dgvAssignFabrics.Size = New System.Drawing.Size(1632, 365)
+        Me.dgvAssignFabrics.TabIndex = 0
+        '
+        'btnClearSupplier
+        '
+        Me.btnClearSupplier.Location = New System.Drawing.Point(12, 12)
+        Me.btnClearSupplier.Name = "btnClearSupplier"
+        Me.btnClearSupplier.Size = New System.Drawing.Size(130, 32)
+        Me.btnClearSupplier.TabIndex = 14
+        Me.btnClearSupplier.Text = "Clear Supplier"
+        Me.btnClearSupplier.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(271, 279)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(46, 20)
+        Me.Label1.TabIndex = 39
+        Me.Label1.Text = "Color"
+        '
+        'cmbColor
+        '
+        Me.cmbColor.FormattingEnabled = True
+        Me.cmbColor.Location = New System.Drawing.Point(275, 320)
+        Me.cmbColor.Name = "cmbColor"
+        Me.cmbColor.Size = New System.Drawing.Size(169, 28)
+        Me.cmbColor.TabIndex = 3
         '
         'frmFabricEntryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1287, 884)
+        Me.ClientSize = New System.Drawing.Size(1750, 916)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.cmbColor)
+        Me.Controls.Add(Me.btnClearSupplier)
         Me.Controls.Add(Me.dgvAssignFabrics)
         Me.Controls.Add(Me.chkAssignToSupplier)
         Me.Controls.Add(Me.lblFabricTypeNameAbbreviation)
@@ -458,4 +490,7 @@ Partial Class frmFabricEntryForm
     Friend WithEvents lblFabricTypeNameAbbreviation As Windows.Forms.Label
     Friend WithEvents chkAssignToSupplier As Windows.Forms.CheckBox
     Friend WithEvents dgvAssignFabrics As Windows.Forms.DataGridView
+    Friend WithEvents btnClearSupplier As Windows.Forms.Button
+    Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents cmbColor As Windows.Forms.ComboBox
 End Class

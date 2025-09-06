@@ -8,13 +8,14 @@ Public Class frmSuppliers
     Private Sub LoadSuppliers()
         cmbSuppliers.Items.Clear()
         Using conn As SqlConnection = DbConnectionManager.GetConnection()
+            conn.Open() ' <-- THIS LINE IS REQUIRED
             Dim cmd As New SqlCommand("SELECT PK_SupplierNameID, CompanyName FROM SupplierInformation", conn)
             Using reader As SqlDataReader = cmd.ExecuteReader()
                 While reader.Read()
                     cmbSuppliers.Items.Add(New With {
-                        .SupplierID = reader("PK_SupplierNameID"),
-                        .CompanyName = reader("CompanyName").ToString()
-                    })
+                    .SupplierID = reader("PK_SupplierNameID"),
+                    .CompanyName = reader("CompanyName").ToString()
+                })
                 End While
             End Using
         End Using
@@ -71,6 +72,7 @@ Public Class frmSuppliers
     }
 
         Using conn As SqlConnection = DbConnectionManager.GetConnection()
+            conn.Open() ' <-- REQUIRED!
             If cmbSuppliers.SelectedItem IsNot Nothing Then
                 ' Update existing supplier
                 Dim selected = DirectCast(cmbSuppliers.SelectedItem, Object)

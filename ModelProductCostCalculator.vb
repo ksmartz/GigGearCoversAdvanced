@@ -1,4 +1,4 @@
-﻿Public Class ProductCostCalculator
+﻿Public Class ModelProductCostCalculator
     Public Shared Function CalculateMaterialNeededSqIn(model As Model) As Decimal
         Dim d = model.Depth + 1.25D
         Dim h = model.Height + 1.25D

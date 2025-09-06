@@ -1,4 +1,4 @@
-﻿Imports System.Data.Entity
+﻿'Imports System.Data.Entity
 Imports System.Windows.Forms
 
 Module Program
